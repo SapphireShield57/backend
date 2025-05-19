@@ -11,7 +11,7 @@ SECRET_KEY = 'your-secret-key'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [os.getenv("DJANGO_ALLOWED_HOSTS", "localhost").split(" ")]
+ALLOWED_HOSTS = ['backend-1xh4.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
