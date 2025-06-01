@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+from corsheaders.defaults import default_headers, default_methods
 
 # Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,7 +85,7 @@ USE_I18N = True
 USE_TZ = True
 
 # Static & Media Files
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -127,6 +128,13 @@ DJOSER = {
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'authorization',
+    'content-type',
+]
+
+CORS_ALLOW_METHODS = list(default_methods)
 
 # Email Backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

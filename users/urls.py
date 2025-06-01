@@ -18,6 +18,8 @@ router = DefaultRouter()
 urlpatterns = [
     # 🔍 User management
     path('list/', list_users),
+    path('list/<int:user_id>/', delete_user),  # ✅ REST-style delete
+
 
     # 🔐 Registration + verification
     path('request/', request_verification),             # Step 1: Request email verification
@@ -30,7 +32,6 @@ urlpatterns = [
     path('forgot-password/', ForgotPasswordView.as_view()),     # Step 1: send code
     path('verify-reset/', ResetPasswordVerifyView.as_view()),  # Step 2: check code
     path('new-password/', ResetPasswordSaveView.as_view()),       # Step 3: set new password
-    path('delete/<int:user_id>/', delete_user),
 
 
     # 🚪 Any ViewSets (router views)
