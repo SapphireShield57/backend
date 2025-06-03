@@ -65,10 +65,17 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # ✅ Database - now using PostgreSQL via Render
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://qr_supply_db_user:GeN2sHTqLhRSCdQgPt1GKerbxMLDZkRb@dpg-d0v78l15pdvs73866hb0-a/qr_supply_db'
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'qr_supply_db',
+        'USER': 'qr_supply_db_user',
+        'PASSWORD': 'GeN2sHTqLhRSCdQgPt1GKerbxMLDZkRb',
+        'HOST': 'dpg-d0v78l15pdvs73866hb0-a.oregon-postgres.render.com',
+        'PORT': '5432',
+    }
 }
+
+
 
 # Password Validation
 AUTH_PASSWORD_VALIDATORS = [
