@@ -1,0 +1,11 @@
+Token f79535c99283f6dc1b177b56db02fb805141f25d
+
+https://github.com/SapphireShield57/inventory-web
+
+https://github.com/SapphireShield57/backend
+
+https://www.postman.com/
+
+https://backend-bjq5.onrender.com/user/list/<int:user_id>/
+https://backend-bjq5.onrender.com/inventory/ product/id/<int:pk>/ [name='product-detail']
+https://backend-bjq5.onrender.com/inventory/ product/qr/<str:qr_code>/ [name='get_product_by_qr']
