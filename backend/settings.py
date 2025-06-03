@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import dj_database_url  # ✅ Added for PostgreSQL support
 from corsheaders.defaults import default_headers, default_methods
 
 # Paths
@@ -62,12 +63,11 @@ TEMPLATES = [
 # WSGI
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-# Database
+# ✅ Database - now using PostgreSQL via Render
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='postgresql://qr_supply_db_user:GeN2sHTqLhRSCdQgPt1GKerbxMLDZkRb@dpg-d0v78l15pdvs73866hb0-a/qr_supply_db'
+    )
 }
 
 # Password Validation
@@ -128,12 +128,7 @@ DJOSER = {
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'authorization',
-    'content-type',
-]
-
+CORS_ALLOW_HEADERS = list(default_headers) + ['authorization', 'content-type']
 CORS_ALLOW_METHODS = list(default_methods)
 
 # Email Backend
