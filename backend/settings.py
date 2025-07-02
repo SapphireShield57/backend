@@ -70,7 +70,7 @@ DATABASES = {
         'NAME': 'qr_supply_db_0tfr',
         'USER': 'qr_supply_db_0tfr_user',
         'PASSWORD': 'EwxUOvPBwqEiEdRZAsHRYqVPF7YxBrP7',
-        'HOST': 'postgresql://qr_supply_db_0tfr_user:EwxUOvPBwqEiEdRZAsHRYqVPF7YxBrP7@dpg-d1h8sq7fte5s739fkt80-a/qr_supply_db_0tfr',
+        'HOST': 'dpg-d1h8sq7fte5s739fkt80-a',
         'PORT': '5432',
     }
 }
