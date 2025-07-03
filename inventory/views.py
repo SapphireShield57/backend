@@ -124,3 +124,52 @@ def product_detail(request, pk):
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def stock_update(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+        action = request.data.get('action')  # 'in' or 'out'
+        qty = int(request.data.get('quantity'))
+
+        if action == 'in':
+            if product.quantity + qty > product.max_capacity:
+                return Response({'detail': 'Exceeds max capacity'}, status=400)
+            product.quantity += qty
+        elif action == 'out':
+            if product.quantity - qty < 0:
+                return Response({'detail': 'Not enough stock'}, status=400)
+            product.quantity -= qty
+        else:
+            return Response({'detail': 'Invalid action'}, status=400)
+
+        product.save()
+
+        # Log the action
+        StockHistory.objects.create(
+            product=product,
+            action=action,
+            quantity_changed=qty
+        )
+
+        return Response({'detail': f'Stock {action} successful'}, status=200)
+
+    except Product.DoesNotExist:
+        return Response({'detail': 'Product not found'}, status=404)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def total_stock(request):
+    total = Product.objects.aggregate(total=models.Sum('quantity'))['total'] or 0
+    return Response({'total_stock': total})
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def product_history(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+        history = product.history.all().order_by('-timestamp').values('action', 'quantity_changed', 'timestamp')
+        return Response(history)
+    except Product.DoesNotExist:
+        return Response({'detail': 'Product not found'}, status=404)
+
