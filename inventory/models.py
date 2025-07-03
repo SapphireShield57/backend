@@ -13,7 +13,11 @@ class Product(models.Model):
 
 class StockHistory(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='history')
-    change_type = models.CharField(max_length=10, choices=[('in', 'Stock In'), ('out', 'Stock Out')])
+    change_type = models.CharField(
+    max_length=10,
+    choices=[('in', 'Stock In'), ('out', 'Stock Out')],
+    default='in'  # ✅ Default for existing rows during migration
+)
     quantity_changed = models.IntegerField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
