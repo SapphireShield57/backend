@@ -11,6 +11,8 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from .models import Product, StockHistory
 from .serializers import StockHistorySerializer
 from .serializers import ProductSerializer
+from django.http import JsonResponse
+from django.core.management import call_command
 
 User = get_user_model()
 
@@ -173,3 +175,11 @@ def product_history(request, pk):  # <- make sure pk is here
     history = StockHistory.objects.filter(product=product).order_by('-timestamp')
     serializer = StockHistorySerializer(history, many=True)
     return Response(serializer.data)
+
+def run_migrations(request):
+    try:
+        call_command('makemigrations', 'inventory')
+        call_command('migrate')
+        return JsonResponse({"status": "Migrations successful"})
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
