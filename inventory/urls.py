@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import run_migrations
 
 urlpatterns = [
     path('product/id/<int:pk>/', views.product_detail, name='product-detail'),
@@ -8,6 +9,7 @@ urlpatterns = [
     path('product/stock-update/<int:pk>/', views.stock_update, name='stock-update'),
     path('product/total-stock/', views.total_stock, name='total-stock'),
     path('product/<int:pk>/history/', views.product_history, name='product-history'),
+    path('run-migrations/', run_migrations),
 ]
 
 
