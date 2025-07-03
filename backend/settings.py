@@ -67,10 +67,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'qr_supply_db',
-        'USER': 'qr_supply_db_user',
-        'PASSWORD': 'GeN2sHTqLhRSCdQgPt1GKerbxMLDZkRb',
-        'HOST': 'dpg-d0v78l15pdvs73866hb0-a',
+        'NAME': 'qr_supply_db_ejkk',
+        'USER': 'qr_supply_db_ejkk_user',
+        'PASSWORD': 'Fh36cWMqfTbK3wPnQzdSIBCMmVPEtjCe',
+        'HOST': 'dpg-d1j4mofdiees73ckro8g-a',
         'PORT': '5432',
     }
 }
