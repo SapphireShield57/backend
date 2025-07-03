@@ -13,6 +13,9 @@ class Product(models.Model):
 
 class StockHistory(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='history')
-    action = models.CharField(max_length=10)  # 'stock_in' or 'stock_out'
+    change_type = models.CharField(max_length=10, choices=[('in', 'Stock In'), ('out', 'Stock Out')])
     quantity_changed = models.IntegerField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.product.name} - {self.change_type} - {self.quantity_changed}"
