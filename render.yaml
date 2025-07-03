@@ -4,10 +4,13 @@ services:
     env: python
     buildCommand: |
       pip install -r requirements.txt
+      python manage.py makemigrations
       python manage.py migrate
     startCommand: gunicorn backend.wsgi:application
     envVars:
       - key: DJANGO_SECRET_KEY
         value: your-secret-key
       - key: DEBUG
-        value: False
+        value: True
+      - key: DATABASE_URL
+        value: postgresql://qr_supply_db_ejkk_user:Fh36cWMqfTbK3wPnQzdSIBCMmVPEtjCe@dpg-d1j4mofdiees73ckro8g-a/qr_supply_db_ejkk  # if not using Render's autodetect
