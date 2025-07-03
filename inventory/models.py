@@ -12,12 +12,7 @@ class Product(models.Model):
         return self.name
 
 class StockHistory(models.Model):
-    ACTION_CHOICES = (
-        ('in', 'Stock In'),
-        ('out', 'Stock Out'),
-        ('update', 'Updated'),
-    )
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='history')
-    action = models.CharField(max_length=10, choices=ACTION_CHOICES)
+    action = models.CharField(max_length=10)  # 'stock_in' or 'stock_out'
     quantity_changed = models.IntegerField()
     timestamp = models.DateTimeField(auto_now_add=True)
