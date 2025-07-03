@@ -8,7 +8,7 @@ urlpatterns = [
     path('product/', views.list_products, name='product-list'),
     path('product/stock-update/<int:pk>/', views.stock_update, name='stock-update'),
     path('product/total-stock/', views.total_stock, name='total-stock'),
-    path('product/<int:pk>/history/', views.product_history, name='product-history'),
+    path('product/<str:qr_code>/history/', views.product_history, name='product-history'),
     path('run-migrations/', run_migrations),
 ]
 
