@@ -178,8 +178,8 @@ def product_history(request, pk):  # <- make sure pk is here
 
 def run_migrations(request):
     try:
-        call_command('makemigrations', 'inventory')
-        call_command('migrate')
-        return JsonResponse({"status": "Migrations successful"})
+        call_command('makemigrations', 'inventory', interactive=False)
+        call_command('migrate', interactive=False)
+        return JsonResponse({"status": "✅ Migrations completed successfully."})
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
