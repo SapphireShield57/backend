@@ -12,4 +12,4 @@ class ProductSerializer(serializers.ModelSerializer):
 class StockHistorySerializer(serializers.ModelSerializer):
     class Meta:
         model = StockHistory
-        fields = ['id', 'action', 'quantity_changed', 'timestamp']
+        fields = ['id', 'change_type', 'quantity_changed', 'timestamp']
