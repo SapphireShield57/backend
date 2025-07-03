@@ -66,14 +66,20 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # ✅ Database - now using PostgreSQL via Render
 DATABASES = {
     'default': {
+<<<<<<< HEAD
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'qr_supply_db_ejkk',
         'USER': 'qr_supply_db_ejkk_user',
         'PASSWORD': 'Fh36cWMqfTbK3wPnQzdSIBCMmVPEtjCe',
         'HOST': 'dpg-d1j4mofdiees73ckro8g-a',
         'PORT': '5432',
+=======
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+>>>>>>> 467f449 (Fix: synced migrations with CustomUser and inventory changes)
     }
 }
+
 
 
 
