@@ -8,3 +8,8 @@ class ProductSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'qr_code': {'required': True},  # ✅ Ensure qr_code is included and writable
         }
+
+class StockHistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StockHistory
+        fields = ['id', 'action', 'quantity_changed', 'timestamp']
