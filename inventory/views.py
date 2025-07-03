@@ -8,6 +8,8 @@ from rest_framework.decorators import api_view, permission_classes, parser_class
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from .models import Product, StockHistory
+from .serializers import StockHistorySerializer
 
 from .models import Product
 from .serializers import ProductSerializer
@@ -164,12 +166,12 @@ def total_stock(request):
     return Response({'total_stock': total})
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
-def product_history(request, pk):
+def product_history(request, product_id):
     try:
-        product = Product.objects.get(pk=pk)
-        history = product.history.all().order_by('-timestamp').values('action', 'quantity_changed', 'timestamp')
-        return Response(history)
+        product = Product.objects.get(pk=product_id)
+        history = StockHistory.objects.filter(product=product).order_by('-timestamp')
+        serializer = StockHistorySerializer(history, many=True)
+        return Response(serializer.data)
     except Product.DoesNotExist:
-        return Response({'detail': 'Product not found'}, status=404)
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 
