@@ -166,11 +166,11 @@ def total_stock(request):
     return Response({'total_stock': total})
 
 @api_view(['GET'])
-def product_history(request, pk):  # <- make sure pk is here
+def product_history(request, qr_code):
     try:
-        product = Product.objects.get(pk=pk)
+        product = Product.objects.get(qr_code=qr_code)
     except Product.DoesNotExist:
-        return Response({'error': 'Product not found'}, status=404)
+        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 
     history = StockHistory.objects.filter(product=product).order_by('-timestamp')
     serializer = StockHistorySerializer(history, many=True)
