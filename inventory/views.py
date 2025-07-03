@@ -10,8 +10,6 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from .models import Product, StockHistory
 from .serializers import StockHistorySerializer
-
-from .models import Product
 from .serializers import ProductSerializer
 
 User = get_user_model()
@@ -166,12 +164,12 @@ def total_stock(request):
     return Response({'total_stock': total})
 
 @api_view(['GET'])
-def product_history(request, product_id):
+def product_history(request, pk):  # <- make sure pk is here
     try:
-        product = Product.objects.get(pk=product_id)
-        history = StockHistory.objects.filter(product=product).order_by('-timestamp')
-        serializer = StockHistorySerializer(history, many=True)
-        return Response(serializer.data)
+        product = Product.objects.get(pk=pk)
     except Product.DoesNotExist:
-        return Response({"error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'Product not found'}, status=404)
 
+    history = StockHistory.objects.filter(product=product).order_by('-timestamp')
+    serializer = StockHistorySerializer(history, many=True)
+    return Response(serializer.data)
